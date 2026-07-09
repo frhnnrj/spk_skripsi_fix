@@ -30,13 +30,13 @@ $is_logged_in = is_logged_in();
                     <li><a href="pages/assessment.php">📝 Penilaian</a></li>
                     <li><a href="pages/results.php">📊 Hasil</a></li>
                 <?php endif; ?>
-                <li style="margin-left: auto;">
+                <li class="user-menu">
                     <?php if ($is_logged_in): ?>
-                        <span style="color: var(--gray); margin-right: 1rem;">👤 <?php echo htmlspecialchars($_SESSION['username'] ?? 'User'); ?></span>
-                        <a href="logout.php" style="color: #ef4444;">🚪 Logout</a>
+                        <span class="text-muted">👤 <?php echo htmlspecialchars($_SESSION['username'] ?? 'User'); ?></span>
+                        <a href="logout.php">🚪 Logout</a>
                     <?php else: ?>
                         <a href="login.php">🔐 Login</a>
-                        <span style="color: var(--gray); margin: 0 0.5rem;">/</span>
+                        <span class="text-muted">/</span>
                         <a href="signup.php">✨ Daftar</a>
                     <?php endif; ?>
                 </li>
@@ -54,25 +54,40 @@ $is_logged_in = is_logged_in();
                         Admin masih mempersiapkan data pakar. Silakan kembali lagi nanti.
                     </div>
                 <?php else: ?>
-                    <div class="box">
-                        <h3>👋 Halo Investor Gen Z!</h3>
-                        <p>
-                            Selamat datang di Sistem Pendukung Keputusan Investasi kami. 
-                            Kami akan membantu Anda menemukan instrumen investasi yang paling sesuai dengan profil dan preferensi Anda.
-                        </p>
+                    <div class="hero-panel">
+                        <div class="hero-card">
+                            <h3>👋 Halo Investor Gen Z!</h3>
+                            <p>
+                                Dapatkan rekomendasi investasi yang lebih objektif berdasarkan profil Anda dan
+                                hasil perhitungan AHP-TOPSIS.
+                            </p>
+                            <div class="quick-actions">
+                                <a href="pages/education.php" class="btn btn-secondary">Mulai Belajar</a>
+                                <?php if ($is_logged_in): ?>
+                                    <a href="pages/assessment.php" class="btn btn-secondary">Isi Penilaian</a>
+                                <?php else: ?>
+                                    <a href="login.php" class="btn btn-secondary">Login untuk Mulai</a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <p class="stat-label">Data Pakar</p>
+                            <p class="stat-value"><?php echo count($pakar); ?> / 1</p>
+                            <p class="text-muted mt-1">Status data pakar aktif untuk referensi rekomendasi.</p>
+                            <span class="badge badge-success">Siap Digunakan</span>
+                        </div>
                     </div>
 
                     <?php if (!$is_logged_in): ?>
-                        <!-- Unauthenticated User - Show Limited Access -->
-                        <div class="card" style="background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1)); border-left: 4px solid var(--primary); margin-bottom: 2rem;">
+                        <div class="lock-card mb-3">
                             <h3>🔐 Akses Terbatas - Silakan Login</h3>
                             <p>
                                 Anda saat ini mengakses sebagai pengunjung. Untuk mendapatkan penilaian dan rekomendasi investasi yang dipersonalisasi, 
                                 silakan login atau buat akun baru.
                             </p>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
-                                <a href="login.php" class="btn btn-primary" style="text-align: center;">🔐 Login</a>
-                                <a href="signup.php" class="btn btn-success" style="text-align: center;">✨ Daftar Akun Baru</a>
+                            <div class="quick-actions">
+                                <a href="login.php" class="btn btn-primary">🔐 Login</a>
+                                <a href="signup.php" class="btn btn-success">✨ Daftar Akun Baru</a>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -81,29 +96,29 @@ $is_logged_in = is_logged_in();
                         <div class="card">
                             <h3>📚 Belajar Dulu</h3>
                             <p>Pahami dasar-dasar investasi dan 5 instrumen yang tersedia</p>
-                            <a href="pages/education.php" class="btn btn-primary" style="margin-top: 1rem;">Mulai Belajar →</a>
+                            <a href="pages/education.php" class="btn btn-primary mt-2">Mulai Belajar →</a>
                         </div>
                         <?php if ($is_logged_in): ?>
                             <div class="card">
                                 <h3>📝 Lakukan Penilaian</h3>
                                 <p>Jawab pertanyaan tentang profil risiko dan preferensi investasi Anda</p>
-                                <a href="pages/assessment.php" class="btn btn-primary" style="margin-top: 1rem;">Mulai Penilaian →</a>
+                                <a href="pages/assessment.php" class="btn btn-primary mt-2">Mulai Penilaian →</a>
                             </div>
                             <div class="card">
                                 <h3>📊 Lihat Hasil</h3>
                                 <p>Dapatkan ranking dan rekomendasi investasi yang dipersonalisasi</p>
-                                <a href="pages/results.php" class="btn btn-primary" style="margin-top: 1rem;">Lihat Hasil →</a>
+                                <a href="pages/results.php" class="btn btn-primary mt-2">Lihat Hasil →</a>
                             </div>
                         <?php else: ?>
-                            <div class="card" style="opacity: 0.6;">
+                            <div class="card muted-card">
                                 <h3>📝 Lakukan Penilaian</h3>
-                                <p style="color: var(--gray);">Silakan login untuk mengakses fitur penilaian</p>
-                                <a href="login.php" class="btn btn-secondary" style="margin-top: 1rem;" onclick="alert('Silakan login terlebih dahulu'); return false;">Penilaian (Login Diperlukan)</a>
+                                <p>Silakan login untuk mengakses fitur penilaian</p>
+                                <a href="login.php" class="btn btn-secondary mt-2">Penilaian (Login Diperlukan)</a>
                             </div>
-                            <div class="card" style="opacity: 0.6;">
+                            <div class="card muted-card">
                                 <h3>📊 Lihat Hasil</h3>
-                                <p style="color: var(--gray);">Silakan login untuk mengakses fitur hasil</p>
-                                <a href="login.php" class="btn btn-secondary" style="margin-top: 1rem;" onclick="alert('Silakan login terlebih dahulu'); return false;">Hasil (Login Diperlukan)</a>
+                                <p>Silakan login untuk mengakses fitur hasil</p>
+                                <a href="login.php" class="btn btn-secondary mt-2">Hasil (Login Diperlukan)</a>
                             </div>
                         <?php endif; ?>
                     </div>

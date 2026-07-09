@@ -23,47 +23,43 @@ $total_pakar = count($pakar);
 
         <main>
             <div class="container">
-                <h2>Selamat Datang!</h2>
-                
-                <div class="box">
-                    <h3>📌 Tentang Sistem</h3>
-                    <p>
-                        Sistem ini dirancang untuk membantu Anda membuat keputusan investasi yang lebih baik 
-                        dengan menganalisis berbagai instrumen investasi menggunakan metodologi <strong>AHP (Analytic Hierarchy Process)</strong> 
-                        dan <strong>TOPSIS (Technique for Order Preference by Similarity to Ideal Solution)</strong>.
-                    </p>
+                <div class="hero-panel">
+                    <div class="hero-card">
+                        <h3>SPK Investasi Gen Z Berbasis AHP-TOPSIS</h3>
+                        <p>
+                            Platform ini membantu Anda memilih instrumen investasi paling sesuai berdasarkan
+                            pembobotan <strong>AHP</strong> dan pemeringkatan <strong>TOPSIS</strong>.
+                        </p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-label">Status Sistem</p>
+                        <p class="stat-value"><?php echo $total_pakar; ?> Pakar Aktif</p>
+                        <p class="text-muted mt-1">
+                            <?php echo $total_pakar > 0 ? 'Sistem siap digunakan oleh user.' : 'Menunggu input data pakar oleh admin.'; ?>
+                        </p>
+                        <span class="badge <?php echo $total_pakar > 0 ? 'badge-success' : 'badge-warning'; ?>">
+                            <?php echo $total_pakar > 0 ? 'Siap Operasional' : 'Belum Lengkap'; ?>
+                        </span>
+                    </div>
                 </div>
 
                 <div class="grid">
                     <div class="card">
-                        <h3>🔐 Panel Admin</h3>
-                        <p>Kelola data pakar dan lakukan perhitungan AHP-TOPSIS</p>
-                        <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--gray);">
-                            <strong>Status:</strong> 
-                            <span class="badge <?php echo $total_pakar > 0 ? 'badge-success' : 'badge-danger'; ?>">
-                                <?php echo $total_pakar > 0 ? '✅ Pakar tersedia' : '❌ Belum ada pakar'; ?>
-                            </span>
-                        </p>
-                        <a href="admin/" class="btn btn-primary" style="margin-top: 1rem;">Akses Admin →</a>
-                    </div>
-
-                    <div class="card">
                         <h3>👤 Panel User</h3>
-                        <p>Lakukan penilaian investasi dan dapatkan rekomendasi</p>
-                        <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--gray);">
-                            <strong>Syarat:</strong>
+                        <p>Lakukan penilaian profil investasi dan dapatkan rekomendasi yang paling sesuai untuk Anda.</p>
+                        <p class="mt-2">
                             <span class="badge <?php echo $total_pakar > 0 ? 'badge-success' : 'badge-warning'; ?>">
-                                <?php echo $total_pakar > 0 ? '✅ Dapat diakses' : '⏳ Menunggu data pakar'; ?>
+                                <?php echo $total_pakar > 0 ? 'Dapat diakses' : 'Menunggu data pakar'; ?>
                             </span>
                         </p>
-                        <a href="user/" class="btn btn-primary" style="margin-top: 1rem; <?php echo $total_pakar === 0 ? 'opacity: 0.5; cursor: not-allowed;' : ''; ?>" <?php echo $total_pakar === 0 ? 'onclick="return false;"' : ''; ?>>
-                            Akses User →
+                        <a href="user/" class="btn btn-primary mt-2 <?php echo $total_pakar === 0 ? 'muted-card' : ''; ?>" <?php echo $total_pakar === 0 ? 'onclick="return false;"' : ''; ?>>
+                            Get Started →
                         </a>
                     </div>
                 </div>
 
                 <div class="box">
-                    <h3>📚 Bagaimana Cara Kerja?</h3>
+                    <h3>📚 Alur Penggunaan</h3>
                     <ol>
                         <li><strong>Admin Input Data:</strong> Admin memasukkan penilaian pakar (pairwise matrix & decision matrix)</li>
                         <li><strong>Sistem Hitung:</strong> Sistem secara otomatis menghitung bobot AHP dan ranking TOPSIS</li>
@@ -73,7 +69,7 @@ $total_pakar = count($pakar);
                     </ol>
                 </div>
 
-                <div class="box" style="border-left-color: var(--info);">
+                <div class="box">
                     <h3>ℹ️ Informasi Teknis</h3>
                     <p>
                         <strong>5 Alternatif Investasi:</strong> Kripto, Saham, SBN Ritel, Reksa Dana, Emas Digital<br>

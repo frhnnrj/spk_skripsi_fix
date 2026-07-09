@@ -27,7 +27,7 @@ $pakar = get_all_pakar();
                 <li><a href="pages/pairwise_form.php">📊 Pairwise Matrix</a></li>
                 <li><a href="pages/decision_form.php">📋 Decision Matrix</a></li>
                 <li><a href="pages/results.php">📈 Hasil Kalkulasi</a></li>
-                <li style="margin-left: auto;"><a href="../">🏠 Home</a></li>
+                <li class="user-menu"><a href="../">🏠 Home</a></li>
             </ul>
         </nav>
 
@@ -45,40 +45,62 @@ $pakar = get_all_pakar();
                     </div>
                 <?php endif; ?>
 
+                <div class="hero-panel">
+                    <div class="hero-card">
+                        <h3>Kontrol Pusat Data Pakar</h3>
+                        <p>
+                            Kelola data input secara berurutan agar hasil perhitungan AHP-TOPSIS selalu valid dan
+                            siap dipakai user.
+                        </p>
+                        <div class="quick-actions">
+                            <a href="pages/pakar_form.php" class="btn btn-secondary">Kelola Pakar</a>
+                            <a href="pages/pairwise_form.php" class="btn btn-secondary">Isi Pairwise</a>
+                            <a href="pages/decision_form.php" class="btn btn-secondary">Isi Decision Matrix</a>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-label">Pakar Aktif</p>
+                        <p class="stat-value"><?php echo count($pakar); ?> / 1</p>
+                        <p class="text-muted mt-1">
+                            <?php echo count($pakar) === 0 ? 'Tambahkan pakar terlebih dahulu.' : 'Data pakar siap untuk proses kalkulasi.'; ?>
+                        </p>
+                    </div>
+                </div>
+
                 <div class="card">
                     <div class="card-header">📈 Status Sistem</div>
                     <p><strong>Pakar Aktif:</strong> <?php echo count($pakar); ?> / 1</p>
                     
                     <?php if (count($pakar) === 0): ?>
-                        <div class="box" style="margin: 1.5rem 0;">
-                            <h3 style="color: var(--warning);">⚠️ Belum Ada Data Pakar</h3>
+                        <div class="box mt-3">
+                            <h3>⚠️ Belum Ada Data Pakar</h3>
                             <p>Sistem membutuhkan data pakar untuk melakukan perhitungan. Klik tombol di bawah untuk menambahkan pakar baru.</p>
                             <a href="pages/pakar_form.php" class="btn btn-primary">➕ Tambah Pakar Baru</a>
                         </div>
                     <?php else: ?>
-                        <div class="box" style="margin: 1.5rem 0; border-left-color: var(--success);">
-                            <h3 style="color: var(--success);">✅ Data Pakar Tersedia</h3>
+                        <div class="box mt-3">
+                            <h3>✅ Data Pakar Tersedia</h3>
                             <p>Pakar: <strong><?php echo $pakar[0]['pakar_nama']; ?></strong></p>
-                            <p style="font-size: 0.9rem; color: var(--gray); margin-top: 0.5rem;">
+                            <p class="text-muted mt-1">
                                 Dibuat: <?php echo date('d-m-Y H:i', strtotime($pakar[0]['created_at'])); ?>
                             </p>
                         </div>
 
-                        <div class="grid" style="margin-top: 2rem;">
+                        <div class="grid mt-3">
                             <div class="card">
                                 <h3>📊 Pairwise Matrix</h3>
                                 <p>Input 15 perbandingan berpasangan antar kriteria</p>
-                                <a href="pages/pairwise_form.php" class="btn btn-primary" style="margin-top: 1rem;">Edit →</a>
+                                <a href="pages/pairwise_form.php" class="btn btn-primary mt-2">Edit →</a>
                             </div>
                             <div class="card">
                                 <h3>📋 Decision Matrix</h3>
                                 <p>Input nilai 5 alternatif untuk 6 kriteria</p>
-                                <a href="pages/decision_form.php" class="btn btn-primary" style="margin-top: 1rem;">Edit →</a>
+                                <a href="pages/decision_form.php" class="btn btn-primary mt-2">Edit →</a>
                             </div>
                             <div class="card">
                                 <h3>📈 Hasil Kalkulasi</h3>
                                 <p>Lihat hasil AHP & TOPSIS ranking</p>
-                                <a href="pages/results.php" class="btn btn-primary" style="margin-top: 1rem;">Lihat →</a>
+                                <a href="pages/results.php" class="btn btn-primary mt-2">Lihat →</a>
                             </div>
                         </div>
                     <?php endif; ?>

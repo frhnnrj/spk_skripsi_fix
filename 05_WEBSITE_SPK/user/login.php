@@ -34,141 +34,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - SPK AHP-TOPSIS</title>
     <link rel="stylesheet" href="../assets/css/style.css">
-    <style>
-        .login-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
-            padding: 1rem;
-        }
-        .login-card {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-top: 4px solid var(--primary);
-        }
-        .login-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-        .login-subtitle {
-            font-size: 0.95rem;
-            color: var(--gray);
-            margin-bottom: 2rem;
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        .form-label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-        .form-control {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 1rem;
-        }
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
-        }
-        .btn-login {
-            width: 100%;
-            padding: 0.75rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s;
-        }
-        .btn-login:hover {
-            background: #2563eb;
-        }
-        .signup-link {
-            text-align: center;
-            margin-top: 1.5rem;
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        .signup-link a {
-            color: var(--primary);
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .signup-link a:hover {
-            text-decoration: underline;
-        }
-        .error-box {
-            background: rgba(239,68,68,0.1);
-            border: 1px solid #fca5a5;
-            border-left: 4px solid #ef4444;
-            padding: 1rem;
-            border-radius: 6px;
-            margin-bottom: 1rem;
-            color: #7f1d1d;
-        }
-        .back-home {
-            margin-top: 1rem;
-            text-align: center;
-        }
-        .back-home a {
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-    </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-card">
-            <h1 class="login-title">🔐 Login</h1>
-            <p class="login-subtitle">Masuk ke akun Anda untuk menggunakan sistem</p>
+    <div class="auth-layout">
+        <div class="auth-card auth-card-sm">
+            <div class="auth-header">
+                <h1>🔐 Login</h1>
+                <p class="auth-subtitle">Masuk untuk mengakses penilaian dan hasil rekomendasi investasi.</p>
+            </div>
 
             <?php if (!empty($login_error)): ?>
-                <div class="error-box">
+                <div class="alert alert-danger">
                     <?php echo $login_error; ?>
                 </div>
             <?php endif; ?>
 
             <form method="POST" action="">
                 <div class="form-group">
-                    <label class="form-label">Username</label>
-                    <input type="text" name="username" class="form-control" 
+                    <label>Username</label>
+                    <input type="text" name="username"
                            placeholder="Masukkan username Anda"
                            value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>"
                            required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control" 
+                    <label>Password</label>
+                    <input type="password" name="password"
                            placeholder="Masukkan password Anda"
                            required>
                 </div>
 
-                <button type="submit" class="btn-login">🔓 Login</button>
+                <button type="submit" class="btn btn-primary auth-cta">🔓 Login</button>
             </form>
 
-            <div class="signup-link">
+            <div class="auth-links">
                 Belum punya akun? <a href="signup.php">Buat akun baru →</a>
             </div>
 
-            <div class="back-home">
+            <div class="auth-back">
                 <a href="../">← Kembali ke beranda</a>
             </div>
         </div>
