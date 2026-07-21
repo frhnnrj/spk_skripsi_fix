@@ -79,7 +79,7 @@ foreach ($decision_matrix as $dm) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decision Matrix - SPK AHP-TOPSIS</title>
+    <title>Input Penilaian Alternatif - SPK AHP-TOPSIS</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <style>
         .criteria-col { background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%); }
@@ -186,7 +186,7 @@ foreach ($decision_matrix as $dm) {
         <header>
             <div class="container">
                 <h1>🔐 Panel Admin</h1>
-                <p>Input Decision Matrix (30 Nilai)</p>
+                <p>Input Hasil Penilaian Alternatif oleh Pakar</p>
             </div>
         </header>
 
@@ -195,7 +195,11 @@ foreach ($decision_matrix as $dm) {
                 <li><a href="../index.php">🏠 Dashboard</a></li>
                 <li><a href="pakar_form.php">➕ Pakar</a></li>
                 <li><a href="pairwise_form.php">📊 Pairwise Matrix</a></li>
-                <li><a href="decision_form.php" class="active">📋 Decision Matrix</a></li>
+                <li>
+                    <a href="decision_form.php" class="active">
+                    📋 Penilaian Alternatif
+                    </a>
+                    </li>
                 <li><a href="results.php">📈 Hasil Kalkulasi</a></li>
                 <li style="margin-left: auto;"><a href="../../">🏠 Home</a></li>
             </ul>
@@ -203,7 +207,7 @@ foreach ($decision_matrix as $dm) {
 
         <main>
             <div class="container">
-                <h2>📋 Input Decision Matrix</h2>
+                <h2>📋 Input Penilaian Alternatif</h2>
                 <p style="color: var(--gray);">Pakar: <strong><?php echo htmlspecialchars($pakar_nama); ?></strong></p>
 
                 <?php if (!empty($_SESSION['message'])): ?>
@@ -217,16 +221,107 @@ foreach ($decision_matrix as $dm) {
                 <?php endif; ?>
 
                 <div class="box">
-                    <h3>ℹ️ Petunjuk Penggunaan</h3>
-                    <p>Isi nilai untuk setiap alternatif pada 6 kriteria berikut:</p>
-                    <ul>
-                        <li><strong>K1 (Return):</strong> Potensi keuntungan tahunan (%) - Benefit</li>
-                        <li><strong>K2 (Risk):</strong> Tingkat risiko/volatilitas (%) - Cost (semakin rendah semakin baik)</li>
-                        <li><strong>K3 (Liquidity):</strong> Kemudahan mencairkan (1-10) - Benefit</li>
-                        <li><strong>K4 (Capital):</strong> Modal minimum (Rp) - Cost (semakin rendah semakin baik)</li>
-                        <li><strong>K5 (Income):</strong> Passive income/dividend (%) - Benefit</li>
-                        <li><strong>K6 (Access):</strong> Kemudahan akses (1-10) - Benefit</li>
-                    </ul>
+
+                    <h3>ℹ️ Petunjuk Pengisian</h3>
+
+                    <p style="margin-bottom:15px; text-align:justify;">
+                        Masukkan <strong>hasil penilaian pakar</strong> terhadap setiap alternatif instrumen investasi
+                        berdasarkan hasil kuesioner penelitian. Nilai yang dimasukkan merupakan skor penilaian
+                        pada masing-masing kriteria, bukan nilai dalam bentuk persentase maupun nominal rupiah.
+                    </p>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="15%">Kode</th>
+                                <th>Kriteria</th>
+                                <th width="15%">Jenis</th>
+                                <th width="20%">Skala</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td><strong>K1</strong></td>
+                                <td>Return</td>
+                                <td>
+                                    <span class="badge badge-success">
+                                        Benefit
+                                    </span>
+                                </td>
+                                <td>1 – 10</td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>K2</strong></td>
+                                <td>Risiko</td>
+                                <td>
+                                    <span class="badge badge-danger">
+                                        Cost
+                                    </span>
+                                </td>
+                                <td>1 – 10</td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>K3</strong></td>
+                                <td>Likuiditas</td>
+                                <td>
+                                    <span class="badge badge-success">
+                                        Benefit
+                                    </span>
+                                </td>
+                                <td>1 – 10</td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>K4</strong></td>
+                                <td>Modal Awal</td>
+                                <td>
+                                    <span class="badge badge-danger">
+                                        Cost
+                                    </span>
+                                </td>
+                                <td>1 – 10</td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>K5</strong></td>
+                                <td>Pendapatan Berkala</td>
+                                <td>
+                                    <span class="badge badge-success">
+                                        Benefit
+                                    </span>
+                                </td>
+                                <td>1 – 10</td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>K6</strong></td>
+                                <td>Kemudahan Akses</td>
+                                <td>
+                                    <span class="badge badge-success">
+                                        Benefit
+                                    </span>
+                                </td>
+                                <td>1 – 10</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                    <div class="alert alert-info" style="margin-top:20px;">
+                        <strong>Catatan</strong><br>
+
+                        Seluruh skor pada halaman ini merupakan hasil penilaian pakar yang diperoleh melalui
+                        kuesioner penelitian. Penilaian diberikan berdasarkan karakteristik masing-masing
+                        instrumen investasi yang disusun dari sumber resmi seperti Bursa Efek Indonesia (BEI),
+                        Otoritas Jasa Keuangan (OJK), Kementerian Keuangan Republik Indonesia, serta sumber
+                        resmi lainnya.
+                    </div>
+
                 </div>
 
                 <form method="POST" action="">
@@ -241,82 +336,180 @@ foreach ($decision_matrix as $dm) {
                             </div>
                             
                             <div class="criteria-grid">
-                                <!-- K1: Return -->
+                                <!-- K1 : Return -->
                                 <div class="form-field">
-                                    <label>
-                                        K1: Return <span>(%)</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <input type="number" name="k1_<?php echo $alt_id; ?>" step="0.01" min="0"
-                                               value="<?php echo $dm ? $dm['k1_return'] : ''; ?>"
-                                               placeholder="0" required>
-                                        <span>%</span>
-                                    </div>
+
+                                <label>
+                                    K1 : Return
+                                    <span>Benefit | Skor 1–10</span>
+                                </label>
+
+                                <div class="input-group">
+
+                                <input
+                                type="number"
+                                name="k1_<?php echo $alt_id; ?>"
+                                min="1"
+                                max="10"
+                                step="1"
+                                value="<?php echo $dm ? $dm['k1_return'] : ''; ?>"
+                                placeholder="1-10"
+                                required>
+
+                                <span>/10</span>
+
+                                </div>
+
                                 </div>
                                 
-                                <!-- K2: Risk -->
+                                <!-- K2 : Risiko -->
+
                                 <div class="form-field">
-                                    <label>
-                                        K2: Risk <span>(%)</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <input type="number" name="k2_<?php echo $alt_id; ?>" step="0.01" min="0"
-                                               value="<?php echo $dm ? $dm['k2_risk'] : ''; ?>"
-                                               placeholder="0" required>
-                                        <span>%</span>
-                                    </div>
+
+                                <label>
+
+                                K2 : Risiko
+
+                                <span>Cost | Skor 1–10</span>
+
+                                </label>
+
+                                <div class="input-group">
+
+                                <input
+                                type="number"
+                                name="k2_<?php echo $alt_id; ?>"
+                                min="1"
+                                max="10"
+                                step="1"
+                                value="<?php echo $dm ? $dm['k2_risk'] : ''; ?>"
+                                placeholder="1-10"
+                                required>
+
+                                <span>/10</span>
+
+                                </div>
+
                                 </div>
                                 
-                                <!-- K3: Liquidity -->
+                                <!-- K3 : Likuiditas -->
+
                                 <div class="form-field">
-                                    <label>
-                                        K3: Liquidity <span>(1-10)</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <input type="number" name="k3_<?php echo $alt_id; ?>" step="0.01" min="1" max="10"
-                                               value="<?php echo $dm ? $dm['k3_liquidity'] : ''; ?>"
-                                               placeholder="1-10" required>
-                                        <span>/10</span>
-                                    </div>
+
+                                <label>
+
+                                K3 : Likuiditas
+
+                                <span>Benefit | Skor 1–10</span>
+
+                                </label>
+
+                                <div class="input-group">
+
+                                <input
+                                type="number"
+                                name="k3_<?php echo $alt_id; ?>"
+                                min="1"
+                                max="10"
+                                step="1"
+                                value="<?php echo $dm ? $dm['k3_liquidity'] : ''; ?>"
+                                placeholder="1-10"
+                                required>
+
+                                <span>/10</span>
+
+                                </div>
+
                                 </div>
                                 
-                                <!-- K4: Capital -->
+                                <!-- K4 : Modal Awal -->
+
                                 <div class="form-field">
-                                    <label>
-                                        K4: Capital <span>(Rp)</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <input type="number" name="k4_<?php echo $alt_id; ?>" min="0"
-                                               value="<?php echo $dm ? $dm['k4_capital'] : ''; ?>"
-                                               placeholder="0" required>
-                                        <span>Rp</span>
-                                    </div>
+
+                                <label>
+
+                                K4 : Modal Awal
+
+                                <span>Cost | Skor 1–10</span>
+
+                                </label>
+
+                                <div class="input-group">
+
+                                <input
+                                type="number"
+                                name="k4_<?php echo $alt_id; ?>"
+                                min="1"
+                                max="10"
+                                step="1"
+                                value="<?php echo $dm ? $dm['k4_capital'] : ''; ?>"
+                                placeholder="1-10"
+                                required>
+
+                                <span>/10</span>
+
+                                </div>
+
                                 </div>
                                 
-                                <!-- K5: Income -->
+                                <!-- K5 : Pendapatan Berkala -->
+
                                 <div class="form-field">
-                                    <label>
-                                        K5: Income <span>(%)</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <input type="number" name="k5_<?php echo $alt_id; ?>" step="0.01" min="0"
-                                               value="<?php echo $dm ? $dm['k5_income'] : ''; ?>"
-                                               placeholder="0" required>
-                                        <span>%</span>
-                                    </div>
+
+                                <label>
+
+                                K5 : Pendapatan Berkala
+
+                                <span>Benefit | Skor 1–10</span>
+
+                                </label>
+
+                                <div class="input-group">
+
+                                <input
+                                type="number"
+                                name="k5_<?php echo $alt_id; ?>"
+                                min="1"
+                                max="10"
+                                step="1"
+                                value="<?php echo $dm ? $dm['k5_income'] : ''; ?>"
+                                placeholder="1-10"
+                                required>
+
+                                <span>/10</span>
+
+                                </div>
+
                                 </div>
                                 
-                                <!-- K6: Access -->
+                                <!-- K6 : Kemudahan Akses -->
+
                                 <div class="form-field">
-                                    <label>
-                                        K6: Access <span>(1-10)</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <input type="number" name="k6_<?php echo $alt_id; ?>" step="0.01" min="1" max="10"
-                                               value="<?php echo $dm ? $dm['k6_access'] : ''; ?>"
-                                               placeholder="1-10" required>
-                                        <span>/10</span>
-                                    </div>
+
+                                <label>
+
+                                K6 : Kemudahan Akses
+
+                                <span>Benefit | Skor 1–10</span>
+
+                                </label>
+
+                                <div class="input-group">
+
+                                <input
+                                type="number"
+                                name="k6_<?php echo $alt_id; ?>"
+                                min="1"
+                                max="10"
+                                step="1"
+                                value="<?php echo $dm ? $dm['k6_access'] : ''; ?>"
+                                placeholder="1-10"
+                                required>
+
+                                <span>/10</span>
+
+                                </div>
+
                                 </div>
                             </div>
                         </div>

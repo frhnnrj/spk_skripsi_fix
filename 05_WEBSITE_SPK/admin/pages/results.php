@@ -38,7 +38,7 @@ $data_complete = $pairwise && count($decision) === 5 && $ahp_results && $topsis_
         <header>
             <div class="container">
                 <h1>🔐 Panel Admin</h1>
-                <p>Hasil Kalkulasi AHP-TOPSIS</p>
+                <p>Hasil Perhitungan Metode AHP-TOPSIS</p>
             </div>
         </header>
 
@@ -99,15 +99,15 @@ $data_complete = $pairwise && count($decision) === 5 && $ahp_results && $topsis_
                 <?php else: ?>
 
                     <div class="alert alert-success">
-                        ✅ Data lengkap - Siap untuk kalkulasi
+                        ✅ Seluruh data penelitian telah lengkap dan siap diproses menggunakan metode AHP-TOPSIS.
                     </div>
 
                     <!-- AHP Results -->
                     <div class="card">
-                        <h3>📊 Hasil AHP (Analytic Hierarchy Process)</h3>
+                        <h3>📊 Bobot Kriteria Hasil AHP</h3>
                         
                         <div class="box">
-                            <h4>Bobot Kriteria (Weight)</h4>
+                            <h4>Bobot Prioritas Setiap Kriteria</h4>
                             <table>
                                 <thead>
                                     <tr>
@@ -123,27 +123,27 @@ $data_complete = $pairwise && count($decision) === 5 && $ahp_results && $topsis_
                                         <td><div class="bobot-bar" style="width: <?php echo min($ahp_results['w_k1'] * 400, 100); ?>%;"></div></td>
                                     </tr>
                                     <tr style="background: var(--light);">
-                                        <td><strong>K2 - Risk</strong></td>
+                                        <td><strong>K2 - Risiko</strong></td>
                                         <td><strong><?php echo number_format($ahp_results['w_k2'], 4); ?></strong> (<?php echo number_format($ahp_results['w_k2'] * 100, 1); ?>%)</td>
                                         <td><div class="bobot-bar" style="width: <?php echo min($ahp_results['w_k2'] * 400, 100); ?>%;"></div></td>
                                     </tr>
                                     <tr>
-                                        <td><strong>K3 - Liquidity</strong></td>
+                                        <td><strong>K3 - Likuiditas</strong></td>
                                         <td><strong><?php echo number_format($ahp_results['w_k3'], 4); ?></strong> (<?php echo number_format($ahp_results['w_k3'] * 100, 1); ?>%)</td>
                                         <td><div class="bobot-bar" style="width: <?php echo min($ahp_results['w_k3'] * 400, 100); ?>%;"></div></td>
                                     </tr>
                                     <tr style="background: var(--light);">
-                                        <td><strong>K4 - Capital</strong></td>
+                                        <td><strong>K4 - Modal Awal</strong></td>
                                         <td><strong><?php echo number_format($ahp_results['w_k4'], 4); ?></strong> (<?php echo number_format($ahp_results['w_k4'] * 100, 1); ?>%)</td>
                                         <td><div class="bobot-bar" style="width: <?php echo min($ahp_results['w_k4'] * 400, 100); ?>%;"></div></td>
                                     </tr>
                                     <tr>
-                                        <td><strong>K5 - Income</strong></td>
+                                        <td><strong>K5 - Pendapatan Berkala</strong></td>
                                         <td><strong><?php echo number_format($ahp_results['w_k5'], 4); ?></strong> (<?php echo number_format($ahp_results['w_k5'] * 100, 1); ?>%)</td>
                                         <td><div class="bobot-bar" style="width: <?php echo min($ahp_results['w_k5'] * 400, 100); ?>%;"></div></td>
                                     </tr>
                                     <tr style="background: var(--light);">
-                                        <td><strong>K6 - Access</strong></td>
+                                        <td><strong>K6 - Kemudahan Akses</strong></td>
                                         <td><strong><?php echo number_format($ahp_results['w_k6'], 4); ?></strong> (<?php echo number_format($ahp_results['w_k6'] * 100, 1); ?>%)</td>
                                         <td><div class="bobot-bar" style="width: <?php echo min($ahp_results['w_k6'] * 400, 100); ?>%;"></div></td>
                                     </tr>
@@ -152,7 +152,7 @@ $data_complete = $pairwise && count($decision) === 5 && $ahp_results && $topsis_
                         </div>
 
                         <div class="box" style="margin-top: 1.5rem; border-left-color: <?php echo $ahp_results['is_consistent'] ? 'var(--success)' : 'var(--danger)'; ?>;">
-                            <h4><?php echo $ahp_results['is_consistent'] ? '✅ Konsistensi Terjaga' : '❌ Konsistensi Kurang'; ?></h4>
+                            <h4><?php echo $ahp_results['is_consistent'] ? '✅ Matriks Perbandingan Konsisten' : '❌ Matriks Perbandingan Tidak Konsisten'; ?></h4>
                             <p>
                                 <strong>Lambda Max:</strong> <?php echo number_format($ahp_results['lambda_max'], 4); ?><br>
                                 <strong>Consistency Index (CI):</strong> <?php echo number_format($ahp_results['ci'], 4); ?><br>
@@ -168,15 +168,15 @@ $data_complete = $pairwise && count($decision) === 5 && $ahp_results && $topsis_
 
                     <!-- TOPSIS Results -->
                     <div class="card">
-                        <h3>🎯 Hasil TOPSIS (Ranking Alternatif)</h3>
+                        <h3>🎯 Hasil Perankingan Alternatif Investasi (TOPSIS)</h3>
                         
                         <table>
                             <thead>
                                 <tr>
                                     <th>Ranking</th>
                                     <th>Alternatif</th>
-                                    <th>Preference Score</th>
-                                    <th>Status</th>
+                                    <th>Nilai Preferensi</th>
+                                    <th>Keterangan</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -203,11 +203,11 @@ $data_complete = $pairwise && count($decision) === 5 && $ahp_results && $topsis_
                                     <td><strong><?php echo number_format($item['score'], 4); ?></strong></td>
                                     <td>
                                         <?php if ($item['rank'] == 1): ?>
-                                            <span class="badge badge-success">🏆 Terbaik</span>
+                                            <span class="badge badge-success">Rekomendasi Utama</span>
                                         <?php elseif ($item['rank'] == 2): ?>
-                                            <span class="badge badge-info">Kedua</span>
+                                            <span class="badge badge-info">Prioritas 2</span>
                                         <?php elseif ($item['rank'] == 3): ?>
-                                            <span class="badge badge-warning">Ketiga</span>
+                                            <span class="badge badge-warning">Prioritas 3</span>
                                         <?php else: ?>
                                             <span class="badge">Rank <?php echo $item['rank']; ?></span>
                                         <?php endif; ?>
@@ -217,6 +217,42 @@ $data_complete = $pairwise && count($decision) === 5 && $ahp_results && $topsis_
                             </tbody>
                         </table>
                     </div>
+
+                    <div class="box" style="margin-top:25px;border-left:5px solid #16a34a;">
+
+                        <h3>📌 Kesimpulan Hasil Perhitungan</h3>
+
+                        <?php
+                        $best = $rankings[0];
+                        ?>
+
+                        <p style="text-align:justify;line-height:1.8">
+
+                        Berdasarkan hasil perhitungan menggunakan metode
+                        <strong>AHP-TOPSIS</strong>,
+                        alternatif investasi yang memperoleh nilai preferensi
+                        tertinggi adalah
+
+                        <strong>
+                        <?php echo $best['icon']; ?>
+                        <?php echo $best['alt']; ?>
+                        </strong>
+
+                        dengan nilai preferensi sebesar
+
+                        <strong>
+
+                        <?php echo number_format($best['score'],4); ?>
+
+                        </strong>
+
+                        sehingga alternatif tersebut direkomendasikan sebagai
+                        pilihan investasi terbaik berdasarkan bobot kriteria
+                        dan hasil penilaian pakar.
+
+                        </p>
+
+                        </div>
 
                     <div class="btn-group" style="margin-top: 2rem;">
                         <form method="POST" action="../process/calculate.php" style="display: inline;">
@@ -231,6 +267,17 @@ $data_complete = $pairwise && count($decision) === 5 && $ahp_results && $topsis_
                 <?php endif; ?>
             </div>
         </main>
+
+        <p style="margin-top:15px;color:#6b7280;font-size:14px">
+
+            Perhitungan dilakukan menggunakan metode
+            Analytical Hierarchy Process (AHP)
+            untuk memperoleh bobot kriteria dan
+            Technique for Order Preference by Similarity to Ideal Solution
+            (TOPSIS)
+            untuk menentukan peringkat alternatif investasi.
+
+            </p>
 
         <footer>
             <div class="container">
